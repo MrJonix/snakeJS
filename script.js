@@ -196,5 +196,5 @@ function isCollision(newDirection) {
   if(snake.some((part) => part.x === nextX && part.y === nextY)) alert("Collision")
   // Check for collision with any part of the snake's body
   return snake.some((part) => part.x === nextX && part.y === nextY);
-}
+} 
 */
