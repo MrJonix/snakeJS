@@ -23,7 +23,6 @@ div {
   width: 35px;
 }
 button {
-
   margin-left: 0;
   padding-left: 10px;
   padding-right: 10px;
@@ -36,10 +35,10 @@ button {
   border-radius: 10px;
   box-shadow: 1px 1px 1px 1px lightgray;
   transition: 500ms ease-in-out;
+  cursor: pointer;
 }
 button:hover {
   background-color: transparent;
   color: black;
   transform: scale(1.2) translateY(-5px);
-} 
- 
+}

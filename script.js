@@ -11,16 +11,19 @@ let foodCollected = false;
 let gameOver = false;
 placeFood();
 setInterval(gameLoop, 150);
+document.getElementById("points").style.display = "none";
 document.addEventListener("keydown", keyDown);
 
 function start() {
   document.getElementById("start").style.display = "none";
+  document.getElementById("points").style.display = "block";
   canvas.style.display = "block";
   placeFood();
   snake = [{ x: 9, y: 3 }];
   draw();
   gameOver = false;
 }
+
 
 function draw() {
   // Clear the canvas
