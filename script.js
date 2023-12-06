@@ -9,15 +9,14 @@ let cellHeight = canvas.height / rows;
 let direction = "LEFT";
 let foodCollected = false;
 let gameOver = false;
-
+placeFood();
 setInterval(gameLoop, 150);
-
 document.addEventListener("keydown", keyDown);
 
 function start() {
   document.getElementById("start").style.display = "none";
-  placeFood();
   canvas.style.display = "block";
+  placeFood();
   snake = [{ x: 9, y: 3 }];
   draw();
   gameOver = false;
