@@ -9,6 +9,8 @@ let cellHeight = canvas.height / rows;
 let direction = "LEFT";
 let foodCollected = false;
 let gameOver = false;
+document.cookie = "HIGHSCORE: 0";
+
 placeFood();
 setInterval(gameLoop, 150);
 document.getElementById("points").style.display = "none";
@@ -23,7 +25,6 @@ function start() {
   draw();
   gameOver = false;
 }
-
 
 function draw() {
   // Clear the canvas
@@ -56,7 +57,6 @@ function shiftSnake() {
 }
 
 function gameLoop() {
-  
   testGameOver();
   if (gameOver) {
     stop();
@@ -67,7 +67,7 @@ function gameLoop() {
   }
   document.getElementById("points").innerHTML = "Punkte: " + snake.length;
   shiftSnake();
-  
+
   if (direction == "LEFT") snake[0].x--;
   if (direction == "RIGHT") snake[0].x++;
   if (direction == "UP") snake[0].y--;
@@ -77,8 +77,6 @@ function gameLoop() {
     placeFood();
     foodCollected = true;
   }
-  
-  
 }
 function goesOverCanvas() {
   if (snake[0].x < 0) {
@@ -105,6 +103,11 @@ function testGameOver() {
   if (duplicatePart) {
     document.getElementById("points").innerHTML = "";
     gameOver = true;
+    let highScore = document.cookie.split(" ")[1];
+    if (snake.length > highScore) {
+      alert("New Highscore: " + snake.length);
+      document.cookie = "HIGHSCORE: " + snake.length;
+    }
   }
 }
 
