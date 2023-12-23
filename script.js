@@ -9,7 +9,8 @@ let cellHeight = canvas.height / rows;
 let direction = "LEFT";
 let foodCollected = false;
 let gameOver = false;
-document.cookie = "HIGHSCORE: 0";
+if(document.cookie == "")
+document.cookie = "SameSite=None; highscore=0";
 
 placeFood();
 setInterval(gameLoop, 150);
@@ -38,7 +39,7 @@ function draw() {
   // Draw food
   ctx.fillStyle = "yellow";
   add(food.x, food.y);
-
+  //autoPlay()
   requestAnimationFrame(draw);
 }
 
@@ -103,10 +104,10 @@ function testGameOver() {
   if (duplicatePart) {
     document.getElementById("points").innerHTML = "";
     gameOver = true;
-    let highScore = document.cookie.split(" ")[1];
+    let highScore = document.cookie.split("=")[1];
     if (snake.length > highScore) {
       alert("New Highscore: " + snake.length);
-      document.cookie = "HIGHSCORE: " + snake.length;
+      document.cookie = "SameSite=None; highscore=" + snake.length;
     }
   }
 }
@@ -137,16 +138,16 @@ function drawGameOver() {
 }
 
 function keyDown(e) {
-  if (e.keyCode == 37) {
+  if (e.keyCode == 37 && direction != "RIGHT") {
     direction = "LEFT";
   }
-  if (e.keyCode == 38) {
+  if (e.keyCode == 38 && direction != "DOWN") {
     direction = "UP";
   }
-  if (e.keyCode == 39) {
+  if (e.keyCode == 39 && direction != "LEFT") {
     direction = "RIGHT";
   }
-  if (e.keyCode == 40) {
+  if (e.keyCode == 40 && direction != "UP") {
     direction = "DOWN";
   }
   if (e.keyCode == 82 && gameOver) {
@@ -165,7 +166,7 @@ function stop() {
   document.getElementById("points").innerHTML = "";
   document.getElementById("canvas").style.display = "none"; // Hide the canvas
 }
-/*
+
 function autoPlay() {
   if (!gameOver) {
     const dx = snake[0].x - food.x;
@@ -198,8 +199,8 @@ function isCollision(newDirection) {
     snake[0].y + (newDirection === "UP" ? -1 : newDirection === "DOWN" ? 1 : 0);
   if (nextY < 0) nextY = rows - 1;
   if (nextY >= rows) nextY = 0;
-  if(snake.some((part) => part.x === nextX && part.y === nextY)) alert("Collision")
+  
   // Check for collision with any part of the snake's body
   return snake.some((part) => part.x === nextX && part.y === nextY);
 } 
-*/
+
